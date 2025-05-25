@@ -1,35 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+//import './App.css'
+import { useState } from "react"
+import Login from "./modules/login/login"
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [ isAuthenticated, setIsAuthenticated ] = useState(false)
+  
+  const handleLoginSuccess = () => {
+    setIsAuthenticated(true);
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>prueba</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {isAuthenticated ? (
+        <div>
+          <h1>Autenticado</h1>
+        </div>
+      ):(
+        <Login 
+          onLoginSuccess={handleLoginSuccess} 
+        />
+      )}
     </>
   )
 }
 
 export default App
+/**
+  Por favor estoy trabajando un proyecto nuevo de estudio y quiero ver un ejemplo en react de como
+  puedo hacer el archivo App que contenga el login y luego como hace el cambio cuando sea correcto 
+  el login, no he desarrollado un login que cambie el componente por el menu? mas o menos me explica 
+  no importa que sea exacto yo armo mi componente de login mas excacto solo quiero la idea de la 
+  estructura del archivo App
+ */
