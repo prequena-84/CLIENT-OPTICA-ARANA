@@ -1,5 +1,9 @@
-//import './App.css'
 import { useState } from "react"
+
+// Importación del css de App
+//import './App.css'
+
+// Importación del modulo del Login
 import Login from "./modules/login/login"
 
 function App() {
@@ -32,4 +36,4 @@ export default App
   el login, no he desarrollado un login que cambie el componente por el menu? mas o menos me explica 
   no importa que sea exacto yo armo mi componente de login mas excacto solo quiero la idea de la 
   estructura del archivo App
- */
+*/

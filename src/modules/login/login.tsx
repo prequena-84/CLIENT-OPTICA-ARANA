@@ -1,17 +1,31 @@
 import React, { useState } from "react"
 import type { props } from "../../interface/ILogin"
+import Form from "../../components/form/form"
+//import InputGroupText from "../../components/input/input-username"
+import InputPassword from "../../components/input/Input-Password"
 
 //http://localhost:3100/login
 
 const Login = ({ onLoginSuccess }: props) => {
 
-    const [ userName, setUserName ] = useState('')
-    const [ password, setPassword ] = useState('')
+    const [ dataLogin, setDataLogin ] = useState({
+        userName:'',
+        password:'',
+    });
+
+    const handleChange = ( event: React.ChangeEvent<HTMLInputElement> ) => {
+        const { name, value } = event.target;
+
+        setDataLogin(prevDataLogin => ({
+            ...prevDataLogin,
+            [name]:value
+        }));
+    };
 
     const handleSubmit = ( e: React.FormEvent ) => {
         e.preventDefault();
 
-        if ( userName === 'Prequena' && password === '1234' ) {
+        if ( dataLogin.userName === 'Prequena' && dataLogin.password === '1234' ) {
             onLoginSuccess();
         } else {
             alert('Credenciales invalidas');
@@ -30,9 +44,17 @@ const Login = ({ onLoginSuccess }: props) => {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
-                <h1>formulario</h1>
-            </form>
+            <Form onSubmit={handleSubmit}>
+                <InputPassword
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeHolder="Password"
+                    value={dataLogin.password}
+                    onChange={(e) => handleChange(e)}
+
+                />
+            </Form>
         </>
     )
 

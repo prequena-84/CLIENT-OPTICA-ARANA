@@ -1,0 +1,14 @@
+import type { InputHTMLAttributes } from "react"
+
+interface IInputPassword {
+    name: string;
+    id:string
+    placeHolder?: string;
+    value: string;
+    onChange: InputHTMLAttributes<HTMLInputElement>['onChange'];
+}
+
+export type {
+    IInputPassword,
+}
+
