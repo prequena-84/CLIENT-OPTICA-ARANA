@@ -4,7 +4,7 @@ import type { IInputPassword } from "../../interface/IInput/IPassword";
 // Importación de css modular
 import styles from '../../css/input-password.module.css';
 
-const InputPassword: React.FC<IInputPassword> = ( {name,id,placeHolder,onChange} ) => {
+const InputPassword: React.FC<IInputPassword> = ( {name,id,placeHolder,onChange,value} ) => {
 
     // Estado para manejar la condicion del password
     const [ mostraPassword, setMostrarPassword ] = useState<boolean>(false);
@@ -16,9 +16,10 @@ const InputPassword: React.FC<IInputPassword> = ( {name,id,placeHolder,onChange}
 
     return (
         <div className={`col-auto ${styles["contenedor-div"]}`}>
-            <label htmlFor="inputPassword2" className="visually-hidden">Password</label>
+            <label htmlFor={id} className="visually-hidden">Password</label>
             <input 
                 name={name} 
+                value={value}
                 onChange={onChange} 
                 id={id} 
                 type={ mostraPassword ? 'text' : 'password' }
@@ -28,11 +29,14 @@ const InputPassword: React.FC<IInputPassword> = ( {name,id,placeHolder,onChange}
             <button
                 type="button"
                 onClick={togglePasswordVisibility}
-                //className={styles["contenedor-btn"]}
+                className="btn btn-primary"
+                aria-label={!mostraPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'} // Mejora de accesibilidad
             >
-            {mostraPassword ? '👁️' : '👁️‍🗨️'}
+                <i className={mostraPassword ? 'fas fa-eye-slash' : 'fas fa-eye'}></i>
             </button>
+
         </div>
     );
 };
+
 export default InputPassword;
