@@ -2,6 +2,7 @@ import type { InputHTMLAttributes } from "react"
 
 interface IInputGroupText {
     name:string;
+    id:string;
     //type?:string;
     //className?:string;
     placeHolder?:string;

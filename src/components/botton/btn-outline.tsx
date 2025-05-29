@@ -1,21 +1,22 @@
 import React from "react";
-import type { IBtn } from "../../interface/btn/IBtn";
+import type { IBtn } from "../../interface/Ibtn/IBtn";
 
 const BtnOutLine:React.FC<IBtn> = ( {
     type="button",
     text= null,
     onClick=undefined,
     className="",
-    outLine="btn-outline-primary",
-    ariaDisabled=false,
-    disabled=false
+    variantOutLine="btn-outline-primary",
+    ariaDisabled="false",
+    disabled=false,
+    sizes="btn-sm",
 } ) => {
 
     return (
         <button 
             type={type}
             onClick={onClick}
-            className={`btn ${outLine} ${className}`}
+            className={`btn ${variantOutLine} ${sizes} ${className}`}
             arial-disabled={ariaDisabled}
             disabled={disabled}
         >

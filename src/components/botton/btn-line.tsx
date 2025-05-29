@@ -1,12 +1,12 @@
 import React from "react";
-import type { IBtn } from "../../interface/btn/IBtn";
+import type { IBtn } from "../../interface/Ibtn/IBtn";
 
 const BtnLine:React.FC<IBtn> = ( {
     type="button",
     text= null,
     onClick=undefined,
     className="",
-    variant="btn-primary",
+    variantLine="btn-primary",
     disabled=false,
     sizes="btn-sm",
 } ) => {
@@ -15,7 +15,7 @@ const BtnLine:React.FC<IBtn> = ( {
         <button 
             type={type}
             onClick={onClick}
-            className={`btn ${variant} ${sizes} ${className}`}
+            className={`btn ${variantLine} ${sizes} ${className}`}
             disabled={disabled}
         >
             {text}

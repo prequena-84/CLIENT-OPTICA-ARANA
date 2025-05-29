@@ -1,6 +1,6 @@
 import React from "react";
 
-import type { IBtnA } from "../../interface/btn/IBtnA";
+import type { IBtnA } from "../../interface/Ibtn/IBtnA";
 
 const BtnA:React.FC<IBtnA> = ( {
     role=undefined,
