@@ -1,6 +1,7 @@
 import type { InputHTMLAttributes } from "react"
 
 interface IInputGroupText {
+    key?:string | undefined;
     name:string;
     id:string;
     //type?:string;

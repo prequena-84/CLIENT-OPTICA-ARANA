@@ -2,6 +2,7 @@ import React from "react";
 
 
 interface IBtnA {
+    key?:string | undefined;
     role?: "button" | undefined;
     className?:string | null;
     text?:string | null;

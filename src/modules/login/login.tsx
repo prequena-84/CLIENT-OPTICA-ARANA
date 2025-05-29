@@ -54,9 +54,12 @@ const Login = ({ onLoginSuccess }: props) => {
     return (
         <>
             <Section>
-                <Form onSubmit={handleSubmit}>
+                <Form 
+                    key="formulario-login" 
+                    onSubmit={handleSubmit}
+                >
                     <fieldset>
-                        <Div>
+                        <Div key="userName">
                             <Legend
                                 text={"Inicio de Sesión"}
                             />
@@ -73,10 +76,10 @@ const Login = ({ onLoginSuccess }: props) => {
                                 onChange={ (e) => handleChange(e) }
                             />
                         </Div>
-                        <Div>
+                        <Div key="password">
                             <Label
                                 text={"Contraseña"}
-                                htmlFor="passWord"
+                                htmlFor="password"
                             />
                             <InputPassword
                                 name="password"
@@ -86,38 +89,38 @@ const Login = ({ onLoginSuccess }: props) => {
                                 onChange={(e) => handleChange(e) }
                             />
                         </Div>
-                        <Div>
-                            <BtnOutLine
+                        <Div key="btn">
+                            <BtnOutLine key="ingresar"
                                 text={"Ingresar"}
                                 type={"submit"}
                                 sizes={"btn-lg"}
                             />
-                            <BtnLine
+                            <BtnLine key="limpiar"
                                 type={"button"}
                                 text="Limpiar"
                                 sizes={"btn-lg"}
                                 onClick={clearForm}
                             />
                         </Div>
-                        <BtnLine
+                        <BtnLine key="olvidaste-contraseña"
                             text={"Olvidaste tu Contraseña"}
                             type={"button"}
                             variantLine={"btn-link"}
                         />
                     </fieldset>
                 </Form>
-                <Aside>
-                    <Div>
+                <Aside key="registro">
+                    <Div key="titulo-1">
                         <H1
                             text="Bienvenido a OPTIPLUS"
                         />
                     </Div>
-                    <Div>
+                    <Div key="titulo-2">
                         <H2
                             text="Crea tu cuenta"
                         />
                     </Div>
-                    <Div>
+                    <Div key="btn-registro">
                         <BtnBlockOutLine
                             text="REGISTRARSE"
                             variantOutLine={"btn-outline-secondary"}

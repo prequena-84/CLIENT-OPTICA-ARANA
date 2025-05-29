@@ -1,6 +1,7 @@
 import type { MouseEventHandler } from "react";
 
 interface IBtn {
+    key?:string | undefined;
     type?: "button" | "submit" | "reset" | undefined;
     className?:string | null;
     text?:string | null;
