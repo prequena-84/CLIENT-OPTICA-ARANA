@@ -9,6 +9,7 @@ const BtnBlockOutLine: React.FC<IBtn> = ( {
     variantOutLine = "btn-outline-primary", 
     disabled=false,
     text ="",
+    sizes= "btn-sm",
     onClick 
 }) => {
 
@@ -22,6 +23,7 @@ const BtnBlockOutLine: React.FC<IBtn> = ( {
                 variantOutLine={variantOutLine}
                 className={className} 
                 onClick={onClick}
+                sizes={sizes}
                 disabled={disabled}
             />
         </Div>

@@ -4,7 +4,15 @@ import type { IInputPassword } from "../../interface/IInput/IPassword";
 // Importación de css modular
 import styles from '../../css/input-password.module.css';
 
-const InputPassword: React.FC<IInputPassword> = ( {name,id,placeHolder,onChange,value} ) => {
+const InputPassword: React.FC<IInputPassword> = ({
+    name,
+    id,
+    placeHolder,
+    onChange,
+    value,
+    className = undefined,
+    classInput = undefined,
+} ) => {
 
     // Estado para manejar la condicion del password
     const [ mostraPassword, setMostrarPassword ] = useState<boolean>(false);
@@ -15,7 +23,7 @@ const InputPassword: React.FC<IInputPassword> = ( {name,id,placeHolder,onChange,
     };
 
     return (
-        <div className={`col-auto ${styles["contenedor-div"]}`}>
+        <div className={`col-auto ${styles["contenedor-div"]} ${className}`}>
             <label htmlFor={id} className="visually-hidden">Password</label>
             <input 
                 name={name} 
@@ -23,7 +31,7 @@ const InputPassword: React.FC<IInputPassword> = ( {name,id,placeHolder,onChange,
                 onChange={onChange} 
                 id={id} 
                 type={ mostraPassword ? 'text' : 'password' }
-                className={`form-control ${styles["contenedor-input"]}`} 
+                className={`form-control ${styles["contenedor-input"]} ${classInput}`} 
                 placeholder={placeHolder}
             />
             <button

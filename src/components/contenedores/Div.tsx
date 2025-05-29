@@ -1,5 +1,5 @@
 import React from "react";
-import type { IDiv } from "../../interface/IContenedores/Idiv";
+import type { IDiv } from "../../interface/IContenedores/IDiv";
 
 const Div: React.FC<IDiv> = ( {children, className = undefined} ) => {
     return(

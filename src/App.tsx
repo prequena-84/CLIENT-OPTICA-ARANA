@@ -1,7 +1,8 @@
 import { useState } from "react"
+import DataProvider from "./modules/api-Context/login-context";
 
 // Importación del css de App
-//import './App.css'
+import './css/App.css';
 
 // Importación del modulo del Login
 import Login from "./modules/login/login"
@@ -16,15 +17,17 @@ function App() {
 
   return (
     <>
-      {isAuthenticated ? (
-        <div>
-          <h1>Autenticado</h1>
-        </div>
-      ):(
-        <Login 
-          onLoginSuccess={handleLoginSuccess} 
-        />
-      )}
+      <DataProvider>
+        {isAuthenticated ? (
+          <div>
+            <h1>Autenticado</h1>
+          </div>
+        ):(
+          <Login 
+            onLoginSuccess={handleLoginSuccess} 
+          />
+        )}
+      </DataProvider>
     </>
   )
 }

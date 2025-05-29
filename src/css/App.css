@@ -1,6 +1,21 @@
-/*#root {
+#root {
+  --fondoForm:  #f6f5f7;
+  --fondoAsideLog: #ff416c;
+  --fondoAsideReg: #be4bdb;
+  --colorBlanco: white;
+}
 
-}*/
+* {
+    margin: 0;
+    padding: 0;
+    /* Asegura que el padding y el border no afecten el tamaño total */
+    box-sizing: border-box;
+}
+
+html, body {
+  /* Asegura que el body ocupe toda la altura de la ventana */
+  height: 100%;
+}
 
 /*.logo {
   height: 6em;

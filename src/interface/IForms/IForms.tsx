@@ -1,6 +1,6 @@
 import type { ReactNode,FormEventHandler } from "react"
 
-interface IForm {
+interface Iform {
     key?:string | undefined;
     children?:ReactNode;
     onSubmit?:FormEventHandler<HTMLFormElement>;
@@ -8,5 +8,5 @@ interface IForm {
 };
 
 export type {
-    IForm,
+    Iform,
 }

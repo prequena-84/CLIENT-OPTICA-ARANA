@@ -5,7 +5,8 @@ interface IInputGroupText {
     name:string;
     id:string;
     //type?:string;
-    //className?:string;
+    className?:string;
+    classInput?:string;
     placeHolder?:string;
     arialLabel?:string;
     //arialDescribedby?:string;

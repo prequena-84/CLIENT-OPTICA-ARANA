@@ -1,33 +1,44 @@
-import React, { useState } from "react"
-import type { props } from "../../interface/ILogin"
+// Importación React
+import React, { useContext, useState } from "react"
+
+// Importación de Componentes
 import Form from "../../components/form/form"
 import Legend from "../../components/form/legend";
-import Label from "../../components/form/label";
 import InputUsername from "../../components/input/input-username";
 import InputPassword from "../../components/input/input-password";
 import BtnLine from "../../components/botton/btn-line";
 import BtnOutLine from "../../components/botton/btn-outline";
 import Div from "../../components/contenedores/Div";
 import Section from "../../components/contenedores/section";
-import Aside from "../../components/contenedores/Aside";
-import H1 from "../../components/title/h1";
-import H2 from "../../components/title/h2";
-import BtnBlockOutLine from "../../components/botton/btn-block-outline";
+
+import Fieldset from "../../components/form/fieldset";
+import AsideLogin from "../aside/aside-login";
+import FormRegistro from "../registro/registro-usuario";
+
+// Importación de Interfaces y tipos
+import type { ILogin } from "../../interface/ILogin";
+
+// Importacion de Estilos y Css
+import stylesFormLogin from "../../css/module/login.module.css";
+import stylesAsideLog from "../../css/module/aside-Login.module.css";
+import stylesAsideReg from "../../css/module/aside-registro.module.css";
+import styleAsideEfecto from "../../css/module/aside-Transicion.module.css"
+
+
+//Importación del Data Provieder para reutilizar el estado global de la autorización
+import { DataContext } from "../api-Context/login-context";
 
 //http://localhost:3100/login
 
-const Login = ({ onLoginSuccess }: props) => {
-
-    const [ dataLogin, setDataLogin ] = useState({
-        userName:'',
-        password:'',
-        token:''
-    });
-
+const Login: React.FC<ILogin> = ({ onLoginSuccess }) => {
+ 
+    const { dataLogin, setDataLogin } = useContext(DataContext);
+    const [ mostrarRegistro, setMostrarRegistro ] = useState(false);
+    
     const handleChange = ( event: React.ChangeEvent<HTMLInputElement> ) => {
         const { name, value } = event.target;
 
-        setDataLogin(prevDataLogin => ({
+        setDataLogin( prevDataLogin  => ({
             ...prevDataLogin,
             [name]:value
         }));
@@ -41,31 +52,37 @@ const Login = ({ onLoginSuccess }: props) => {
         });
     };
 
-    const handleSubmit = ( e: React.FormEvent ) => {
-        e.preventDefault();
+    const forgotPassword = () => {
+        alert('hice click');
+    };
 
-        if ( dataLogin.userName === 'Prequena' && dataLogin.password === '1234' ) {
-            onLoginSuccess();
-        } else {
-            alert('Credenciales invalidas');
-        };
+    const handleSubmit = ( e: React.FormEvent ) => {
+        e.preventDefault();      
+        console.log(dataLogin)  
+    };
+
+    const togleFormReg = () => {
+        setMostrarRegistro(!mostrarRegistro);
     };
 
     return (
-        <>
-            <Section>
-                <Form 
+        <Section 
+            key="login" 
+            className={stylesFormLogin["container-section"]}
+        >
+            {!mostrarRegistro && <Form 
                     key="formulario-login" 
                     onSubmit={handleSubmit}
+                    className={stylesFormLogin["container-Form"]}
                 >
-                    <fieldset>
-                        <Div key="userName">
+                    <Fieldset
+                        className={stylesFormLogin.containerFieldset}
+                    >
+                        <Div 
+                            key="userName"
+                        >
                             <Legend
                                 text={"Inicio de Sesión"}
-                            />
-                            <Label
-                                text={"Usuario"}
-                                htmlFor="userName"
                             />
                             <InputUsername
                                 name="userName"
@@ -74,63 +91,76 @@ const Login = ({ onLoginSuccess }: props) => {
                                 arialLabel="userName"
                                 value={dataLogin.userName}
                                 onChange={ (e) => handleChange(e) }
+                                className={stylesFormLogin.inputUserName}
                             />
                         </Div>
                         <Div key="password">
-                            <Label
-                                text={"Contraseña"}
-                                htmlFor="password"
-                            />
                             <InputPassword
                                 name="password"
                                 id="passWord"
+                                className={stylesFormLogin.inputPassword}
                                 placeHolder="Contraseña"
                                 value={dataLogin.password}
                                 onChange={(e) => handleChange(e) }
                             />
                         </Div>
-                        <Div key="btn">
-                            <BtnOutLine key="ingresar"
+                        <Div 
+                            key="olvidaste-contraseña"
+                            className={stylesFormLogin["container-olvidates-password"]}
+                        >
+                            <BtnLine
+                                text={"Olvidaste tu Contraseña"}
+                                type={"button"}
+                                variantLine={"btn-link"}
+                                onClick={forgotPassword}
+                            />
+                        </Div>
+                        <Div 
+                            key="btn"
+                            className={stylesFormLogin["container-btn-login"]}
+                        >
+                            <BtnOutLine 
+                                key="ingresar"
                                 text={"Ingresar"}
                                 type={"submit"}
                                 sizes={"btn-lg"}
+                                className={stylesFormLogin.btnIngresar}
                             />
-                            <BtnLine key="limpiar"
+                            <BtnLine 
+                                key="limpiar"
                                 type={"button"}
                                 text="Limpiar"
                                 sizes={"btn-lg"}
                                 onClick={clearForm}
+                                className={stylesFormLogin.btnLimpiar}
                             />
                         </Div>
-                        <BtnLine key="olvidaste-contraseña"
-                            text={"Olvidaste tu Contraseña"}
-                            type={"button"}
-                            variantLine={"btn-link"}
-                        />
-                    </fieldset>
-                </Form>
-                <Aside key="registro">
-                    <Div key="titulo-1">
-                        <H1
-                            text="Bienvenido a OPTIPLUS"
-                        />
-                    </Div>
-                    <Div key="titulo-2">
-                        <H2
-                            text="Crea tu cuenta"
-                        />
-                    </Div>
-                    <Div key="btn-registro">
-                        <BtnBlockOutLine
-                            text="REGISTRARSE"
-                            variantOutLine={"btn-outline-secondary"}
-                        />
-                    </Div>
-                </Aside>
-            </Section>
-        </>
+                    </Fieldset>
+            </Form>}
+           <AsideLogin
+                classAside={`${styleAsideEfecto.aside} ${mostrarRegistro ? stylesAsideReg["container-Aside"] : stylesAsideLog["container-Aside"]} ${mostrarRegistro ? 'rotate-left' : ''}`}
+                textH1="¡Bienvenidos!"
+                textH2={mostrarRegistro ? "Ingresa a tu Cuenta" : "Crea tu cuenta" }
+                textBtn={mostrarRegistro ? "INGRESAR" : "REGISTRAR"}
+                classRegistro={mostrarRegistro ? stylesAsideLog["container-btn-registro"] : stylesAsideReg["container-btn-registro"] }
+                classBtnRegistro={mostrarRegistro ? stylesAsideReg["btn-registro"] : stylesAsideLog["btn-registro"]}
+                onClick={togleFormReg}
+            />
+            {mostrarRegistro && <FormRegistro 
+                key="form-registro"
+            />}
+        </Section>
     );
-
 };
 
 export default Login;
+
+/* Body:
+            idUsuario,
+            userName,
+            Password,
+            Nombres,
+            Apellidos,
+            Email,
+            WhastApp,
+*/
