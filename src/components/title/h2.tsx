@@ -1,5 +1,5 @@
 import React from "react";
-import type { IH2 } from "../../interface/Ititle/IH2";
+import type { IH2 } from "../../interface/Ititle/Ih2";
 
 const H2: React.FC<IH2> = ( {text="", className = undefined} ) => {
     return (

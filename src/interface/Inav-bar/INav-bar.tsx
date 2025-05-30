@@ -9,8 +9,8 @@ interface Menu {
 }
 
 interface INavBar {
-    titleBrand: string;
-    titleNavbar: string;
+    titleBrand?: string;
+    titleNavbar?: string;
 }
 
 export type {

@@ -1,5 +1,5 @@
 import React from "react";
-import type { ISection } from "../../interface/IContenedores/ISection.tsx"
+import type { ISection } from "../../interface/IContenedores/Isection";
 
 const Section: React.FC<ISection> = ( {children, className = undefined} ) => {
     return (
