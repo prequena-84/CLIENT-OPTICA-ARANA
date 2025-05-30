@@ -8,7 +8,7 @@ const defaultContextValue: ILoginContext = {
         token: '',
     },
     setDataLogin: () => {},
-}
+};
 
 export const DataContext = createContext(defaultContextValue);
 
@@ -17,7 +17,7 @@ const DataProvider: React.FC<ILoginContext> = ( {children, key = undefined} ) =>
     const [ dataLogin, setDataLogin ] = useState({
         userName:'',
         password:'',
-        token:''
+        token:'',
     });
 
     return (

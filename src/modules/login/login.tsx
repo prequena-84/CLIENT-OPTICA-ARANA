@@ -155,12 +155,41 @@ const Login: React.FC<ILogin> = ({ onLoginSuccess }) => {
 
 export default Login;
 
-/* Body:
-            idUsuario,
-            userName,
-            Password,
-            Nombres,
-            Apellidos,
-            Email,
-            WhastApp,
+/* 
+    Se creo sastifactoriamente el usuario que accede al sistema 
+    queda pendiente arreglar varias cosas:
+
+    1- Quitar el idUser y averiguar en MongoDB como lo genera automaticvamente
+    2- Hacer en el servicio de Login la comparación de usuario y clave con este ejemplo de codigo
+
+    import bcrypt from 'bcrypt';
+    import User from './models/User'; // Asegúrate de importar tu modelo de usuario
+
+    const loginUser = async (userName, password) => {
+        try {
+            // Busca el usuario por su nombre de usuario
+            const user = await User.findOne({ userName });
+            
+            // Verifica si el usuario existe
+            if (!user) {
+                throw new Error('Usuario no encontrado');
+            }
+            // Compara la contraseña proporcionada con la contraseña encriptada
+            const isMatch = await bcrypt.compare(password, user.Password);
+            // Si la comparación es exitosa, el usuario puede iniciar sesión
+            if (isMatch) {
+                console.log('Inicio de sesión exitoso');
+                // Aquí puedes manejar el inicio de sesión (por ejemplo, generar un token)
+                return user; // O retorna el usuario, o lo que necesites
+            } else {
+                throw new Error('Contraseña incorrecta');
+            }
+        } catch (error) {
+            console.error('Error en el inicio de sesión:', error);
+            throw error; // Maneja el error según sea necesario
+        }
+    };
+
+    3- preparar revisar el resto de  los componentes
+    4- trasladar esta sintasis en el nuevo proyecto de la prueba de InterFell
 */

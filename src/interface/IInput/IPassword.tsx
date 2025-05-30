@@ -7,7 +7,7 @@ interface IInputPassword {
     name: string;
     id:string
     placeHolder?: string;
-    value: string;
+    value: string | undefined;
     onChange: InputHTMLAttributes<HTMLInputElement>['onChange'];
 }
 

@@ -9,6 +9,7 @@
     "server": "vite preview"
   },
   "dependencies": {
+    "axios": "^1.9.0",
     "bootstrap": "^5.3.6",
     "client": "file:",
     "dotenv": "^16.5.0",
