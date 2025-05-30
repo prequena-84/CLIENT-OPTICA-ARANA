@@ -6,7 +6,7 @@ import H2 from "../../components/title/h2";
 import Div from "../../components/contenedores/Div";
 import BtnBlockOutLine from "../../components/botton/btn-block-outline";
 
-import type { IAsideLogin } from "../../interface/aside/IAside-login";
+import type { IAsideLogin } from "../../interface/Iaside/IAside-login";
 
 const AsideLogin: React.FC<IAsideLogin> = ( {
     keyAside = undefined,

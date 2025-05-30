@@ -13,7 +13,7 @@ import BtnLine from "../../components/botton/btn-line";
 import Input from "../../components/input/input";
 
 // Importacion de Estilos
-import stylesFormLogin from "../../css/module/login-registro.module.css";
+import stylesFormLogin from "../../css/module/login/login-registro.module.css";
 
 // Importacion de interfaces
 import type { ILogin } from "../../interface/ILogin";

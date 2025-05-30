@@ -1,11 +1,11 @@
 import type { ReactNode } from "react"
 
-interface Ifieldset {
+interface Imain {
     key?:string | undefined;
     children?:ReactNode;
     className?: string | undefined;
 }
 
 export type {
-    Ifieldset,
+    Imain,
 }

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import type { IInputPassword } from "../../interface/IInput/IPassword";
 
 // Importación de css modular
-import styles from '../../css/input-password.module.css';
+import styles from "../../css/module/input/input-password.module.css";
 
 const InputPassword: React.FC<IInputPassword> = ({
     name,

@@ -6,6 +6,7 @@ import App from './App.tsx';
 
 // Imortación de Bootstrap
 import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

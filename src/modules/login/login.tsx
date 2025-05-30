@@ -18,16 +18,19 @@ import FormRegistro from "../registro/registro-usuario";
 import type { ILogin } from "../../interface/ILogin";
 
 // Importacion de Estilos y Css
-import stylesFormLogin from "../../css/module/login.module.css";
-import stylesAsideLog from "../../css/module/aside-Login.module.css";
-import stylesAsideReg from "../../css/module/aside-registro.module.css";
-import styleAsideEfecto from "../../css/module/aside-Transicion.module.css"
+import stylesFormLogin from "../../css/module/login/login.module.css";
+import stylesAsideLog from "../../css/module/aside/aside-login.module.css";
+import stylesAsideReg from "../../css/module/aside/aside-registro.module.css";
+import styleAsideEfecto from "../../css/module/aside/aside-Transicion.module.css";
 
 //Importación del Data Provieder para reutilizar el estado global de la autorización
 import { DataContext } from "../api-Context/login-context";
 
 // Importación de Axios
 import axios from "axios";
+
+//Importacion de URI API
+const uriLogin = import.meta.env.VITE_API_LOGIN_USER;
 
 const Login: React.FC<ILogin> = ({ onLoginSuccess }) => {
  
@@ -56,6 +59,7 @@ const Login: React.FC<ILogin> = ({ onLoginSuccess }) => {
         };
     };
 
+    // Queda pendiente enviar el token si se olvian la contraseña
     const forgotPassword = () => {
         alert('hice click');
     };
@@ -67,8 +71,9 @@ const Login: React.FC<ILogin> = ({ onLoginSuccess }) => {
             userName:dataLogin?.userName,
             Password:dataLogin?.password,
         };
+
         try {
-            const respLogin = await axios.post('http://localhost:3100/user/login/', {
+            const respLogin = await axios.post(uriLogin, {
                 dataUser
             });
 

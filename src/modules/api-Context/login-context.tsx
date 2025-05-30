@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react';
-import type { ILoginContext,IDatalogin } from '../../interface/api-context/ILogin-context';
+import type { ILoginContext,IDatalogin } from '../../interface/Iapi-context/ILogin-context';
 
 const defaultContextValue: ILoginContext = {
     dataLogin: {
