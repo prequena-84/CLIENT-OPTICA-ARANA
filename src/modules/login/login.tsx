@@ -67,22 +67,44 @@ const Login: React.FC<ILogin> = ({ onLoginSuccess }) => {
             userName:dataLogin?.userName,
             Password:dataLogin?.password,
         };
-        
-        const respLogin = await axios.post('http://localhost:3100/user/login/', {
-            dataUser
-        });
+        try {
+            const respLogin = await axios.post('http://localhost:3100/user/login/', {
+                dataUser
+            });
 
-        if (setDataLogin) {
-            setDataLogin( prevDataLogin  => ({
-                ...prevDataLogin,
-                token:respLogin.data.token,
-                autorizado:respLogin.data.message,
-            }));
-        };
+            if (setDataLogin) {
+                setDataLogin( prevDataLogin  => ({
+                    ...prevDataLogin,
+                    token:respLogin.data.token,
+                    autorizado:respLogin.data.message,
+                }));
+            };
 
-        if ( respLogin.data.message === 'Autorizado' ) {
-            if ( onLoginSuccess ) {
-                onLoginSuccess()
+            if ( respLogin.data.message === 'Autorizado' ) {
+                if ( onLoginSuccess ) {
+                    onLoginSuccess()
+                };
+            };
+        } catch(err) {
+            if (axios.isAxiosError(err)) {
+                // Si el error es un error de Axios
+                if (err.response) {
+                    // La solicitud se realizó y el servidor respondió con un código de estado que no está en el rango de 2xx
+                    console.error('Error de respuesta:', err.response.data);
+                    console.error('Código de estado:', err.response.status);
+
+                    alert( err.response.data.message === 'No Autorizado' ? `Credenciales Invalidas: ${err.response.data.message}`: '' )
+
+                } else if (err.request) {
+                    // La solicitud se realizó pero no se recibió respuesta
+                    console.error('Error de solicitud:', err.request);
+                } else {
+                    // Algo sucedió al configurar la solicitud que lanzó un error
+                    console.error('Error:', err.message);
+                }
+            } else {
+                // Manejar otros tipos de errores
+                console.error('Error no relacionado con Axios:', err);
             };
         };
     };
