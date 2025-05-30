@@ -10,7 +10,6 @@ import BtnLine from "../../components/botton/btn-line";
 import BtnOutLine from "../../components/botton/btn-outline";
 import Div from "../../components/contenedores/Div";
 import Section from "../../components/contenedores/section";
-
 import Fieldset from "../../components/form/fieldset";
 import AsideLogin from "../aside/aside-login";
 import FormRegistro from "../registro/registro-usuario";
@@ -24,11 +23,11 @@ import stylesAsideLog from "../../css/module/aside-Login.module.css";
 import stylesAsideReg from "../../css/module/aside-registro.module.css";
 import styleAsideEfecto from "../../css/module/aside-Transicion.module.css"
 
-
 //Importación del Data Provieder para reutilizar el estado global de la autorización
 import { DataContext } from "../api-Context/login-context";
 
-//http://localhost:3100/login
+// Importación de Axios
+import axios from "axios";
 
 const Login: React.FC<ILogin> = ({ onLoginSuccess }) => {
  
@@ -38,27 +37,54 @@ const Login: React.FC<ILogin> = ({ onLoginSuccess }) => {
     const handleChange = ( event: React.ChangeEvent<HTMLInputElement> ) => {
         const { name, value } = event.target;
 
-        setDataLogin( prevDataLogin  => ({
-            ...prevDataLogin,
-            [name]:value
-        }));
+        if ( setDataLogin ) {
+            setDataLogin( prevDataLogin  => ({
+                ...prevDataLogin,
+                [name]:value
+            }));
+        };
     };
 
-    const clearForm = () => {
-        setDataLogin({
-            userName:'',
-            password:'',
-            token:'',
-        });
+    const clearForm = () => { 
+        if (setDataLogin) {
+            setDataLogin({
+                userName:'',
+                password:'',
+                token:'',
+                autorizado:'',
+            });
+        };
     };
 
     const forgotPassword = () => {
         alert('hice click');
     };
 
-    const handleSubmit = ( e: React.FormEvent ) => {
-        e.preventDefault();      
-        console.log(dataLogin)  
+    const handleSubmit = async ( e: React.FormEvent ) => {
+        e.preventDefault(); 
+
+        const dataUser = {
+            userName:dataLogin?.userName,
+            Password:dataLogin?.password,
+        };
+        
+        const respLogin = await axios.post('http://localhost:3100/user/login/', {
+            dataUser
+        });
+
+        if (setDataLogin) {
+            setDataLogin( prevDataLogin  => ({
+                ...prevDataLogin,
+                token:respLogin.data.token,
+                autorizado:respLogin.data.message,
+            }));
+        };
+
+        if ( respLogin.data.message === 'Autorizado' ) {
+            if ( onLoginSuccess ) {
+                onLoginSuccess()
+            };
+        };
     };
 
     const togleFormReg = () => {
@@ -89,7 +115,7 @@ const Login: React.FC<ILogin> = ({ onLoginSuccess }) => {
                                 id="userName"
                                 placeHolder="Usuario"
                                 arialLabel="userName"
-                                value={dataLogin.userName}
+                                value={dataLogin?.userName}
                                 onChange={ (e) => handleChange(e) }
                                 className={stylesFormLogin.inputUserName}
                             />
@@ -100,7 +126,7 @@ const Login: React.FC<ILogin> = ({ onLoginSuccess }) => {
                                 id="passWord"
                                 className={stylesFormLogin.inputPassword}
                                 placeHolder="Contraseña"
-                                value={dataLogin.password}
+                                value={dataLogin?.password}
                                 onChange={(e) => handleChange(e) }
                             />
                         </Div>
@@ -154,42 +180,3 @@ const Login: React.FC<ILogin> = ({ onLoginSuccess }) => {
 };
 
 export default Login;
-
-/* 
-    Se creo sastifactoriamente el usuario que accede al sistema 
-    queda pendiente arreglar varias cosas:
-
-    1- Quitar el idUser y averiguar en MongoDB como lo genera automaticvamente
-    2- Hacer en el servicio de Login la comparación de usuario y clave con este ejemplo de codigo
-
-    import bcrypt from 'bcrypt';
-    import User from './models/User'; // Asegúrate de importar tu modelo de usuario
-
-    const loginUser = async (userName, password) => {
-        try {
-            // Busca el usuario por su nombre de usuario
-            const user = await User.findOne({ userName });
-            
-            // Verifica si el usuario existe
-            if (!user) {
-                throw new Error('Usuario no encontrado');
-            }
-            // Compara la contraseña proporcionada con la contraseña encriptada
-            const isMatch = await bcrypt.compare(password, user.Password);
-            // Si la comparación es exitosa, el usuario puede iniciar sesión
-            if (isMatch) {
-                console.log('Inicio de sesión exitoso');
-                // Aquí puedes manejar el inicio de sesión (por ejemplo, generar un token)
-                return user; // O retorna el usuario, o lo que necesites
-            } else {
-                throw new Error('Contraseña incorrecta');
-            }
-        } catch (error) {
-            console.error('Error en el inicio de sesión:', error);
-            throw error; // Maneja el error según sea necesario
-        }
-    };
-
-    3- preparar revisar el resto de  los componentes
-    4- trasladar esta sintasis en el nuevo proyecto de la prueba de InterFell
-*/

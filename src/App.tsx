@@ -9,10 +9,10 @@ import Login from "./modules/login/login"
 
 function App() {
 
-  const [ isAuthenticated, setIsAuthenticated ] = useState(false)
-  
+  const [ isAuthenticated, setIsAuthenticated ] = useState(false);
+
   const handleLoginSuccess = () => {
-    setIsAuthenticated(true);
+      setIsAuthenticated(true);
   };
 
   return (
@@ -32,11 +32,4 @@ function App() {
   )
 }
 
-export default App
-/**
-  Por favor estoy trabajando un proyecto nuevo de estudio y quiero ver un ejemplo en react de como
-  puedo hacer el archivo App que contenga el login y luego como hace el cambio cuando sea correcto 
-  el login, no he desarrollado un login que cambie el componente por el menu? mas o menos me explica 
-  no importa que sea exacto yo armo mi componente de login mas excacto solo quiero la idea de la 
-  estructura del archivo App
-*/
+export default App;

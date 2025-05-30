@@ -1,23 +1,25 @@
 import React, { createContext, useState } from 'react';
-import type { ILoginContext } from '../../interface/api-context/ILogin-context';
+import type { ILoginContext,IDatalogin } from '../../interface/api-context/ILogin-context';
 
 const defaultContextValue: ILoginContext = {
     dataLogin: {
         userName: '',
         password: '',
         token: '',
+        autorizado:'',
     },
     setDataLogin: () => {},
 };
 
-export const DataContext = createContext(defaultContextValue);
+export const DataContext = createContext<ILoginContext>(defaultContextValue);
 
 const DataProvider: React.FC<ILoginContext> = ( {children, key = undefined} ) => {
 
-    const [ dataLogin, setDataLogin ] = useState({
+    const [ dataLogin, setDataLogin ] = useState<IDatalogin>({
         userName:'',
         password:'',
         token:'',
+        autorizado:'',
     });
 
     return (

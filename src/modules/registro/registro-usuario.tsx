@@ -15,9 +15,11 @@ import Input from "../../components/input/input";
 // Importacion de Estilos
 import stylesFormLogin from "../../css/module/login-registro.module.css";
 
-// Importacion de intyerfaces
+// Importacion de interfaces
 import type { ILogin } from "../../interface/ILogin";
 import type { IUser } from "../../interface/IRegistro";
+
+// Importacion de hook axios para hacer peticiones al servidor
 import axios from "axios";
 
 const FormRegistro: React.FC<ILogin> = () => {
@@ -34,7 +36,6 @@ const FormRegistro: React.FC<ILogin> = () => {
 
     const handleChange = ( event: React.ChangeEvent<HTMLInputElement> ) => {
         const { name, value } = event.target;
-
         setDataUser( prevDataUser  => ({
             ...prevDataUser,
             [name]:value
@@ -42,15 +43,13 @@ const FormRegistro: React.FC<ILogin> = () => {
     };
 
     const handleSubmit = async ( e: React.FormEvent ) => {
-        e.preventDefault();        
-        
-        console.log(dataUser)
+        e.preventDefault();  
 
-        const responseUser = await axios.post('http://localhost:3100/user/insert/', {
+        const response = await axios.post('http://localhost:3100/user/insert/', {
             dataUser
         });
 
-        console.log('repuesta servidor', responseUser.data.data )
+        console.log(response);
     };
 
     const clearForm = () => {
@@ -174,20 +173,17 @@ const FormRegistro: React.FC<ILogin> = () => {
                         sizes={"btn-lg"}
                         className={stylesFormLogin.btnIngresar}
                     />
-                        <BtnLine key="limpiar"
-                            type={"button"}
-                            text="Limpiar"
-                            sizes={"btn-lg"}
-                            onClick={clearForm}
-                            className={stylesFormLogin.btnLimpiar}
-                        />
+                    <BtnLine key="limpiar"
+                        type={"button"}
+                        text="Limpiar"
+                        sizes={"btn-lg"}
+                        onClick={clearForm}
+                        className={stylesFormLogin.btnLimpiar}
+                    />
                 </Div>
             </Fieldset>
-
         </Form>
     );
-
-
 };
 
 export default FormRegistro;
