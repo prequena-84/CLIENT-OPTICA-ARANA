@@ -25,6 +25,7 @@ import styleAsideEfecto from "../../css/module/aside/aside-Transicion.module.css
 
 // Importacion del Provider la Api context
 import { DataContext } from "../api-Context/login-context";
+import { AuthContext } from "../api-Context/auth-context";
 
 // Importación de Axios
 import axios from "axios";
@@ -32,9 +33,10 @@ import axios from "axios";
 //Importacion de URI API
 const uriLogin = import.meta.env.VITE_API_LOGIN_USER;
 
-const Login: React.FC<ILogin> = ({ onLoginSuccess }) => {
+const Login: React.FC<ILogin> = () => {
     
     const { dataLogin, setDataLogin } = useContext(DataContext);
+    const { setIsAuthenticated } = useContext(AuthContext);
     const [ mostrarRegistro, setMostrarRegistro ] = useState(false);
     
     const handleChange = ( event: React.ChangeEvent<HTMLInputElement> ) => {
@@ -73,6 +75,7 @@ const Login: React.FC<ILogin> = ({ onLoginSuccess }) => {
         };
 
         try {
+
             const respLogin = await axios.post(uriLogin, {
                 dataUser
             });
@@ -86,19 +89,22 @@ const Login: React.FC<ILogin> = ({ onLoginSuccess }) => {
             };
 
             if ( respLogin.data.message === 'Autorizado' ) {
-                if ( onLoginSuccess ) {
-                    onLoginSuccess()
-                };
+                localStorage.setItem('token', respLogin.data.token);
+                if ( setIsAuthenticated ) setIsAuthenticated(true)
             };
+
         } catch(err) {
             if (axios.isAxiosError(err)) {
+
                 // Si el error es un error de Axios
                 if (err.response) {
+
                     // La solicitud se realizó y el servidor respondió con un código de estado que no está en el rango de 2xx
                     console.error('Error de respuesta:', err.response.data);
                     console.error('Código de estado:', err.response.status);
 
-                    alert( err.response.data.message === 'No Autorizado' ? `Credenciales Invalidas: ${err.response.data.message}`: '' )
+                    alert( err.response.data.message === 'No Autorizado' ? `Por favor ingrese un Usuario o Contraseña valida: ${err.response.data.message}.`: `${err.response.data.message}: Por favor agregue un Usuario o Contraseña validos.` )
+                    if ( setIsAuthenticated ) setIsAuthenticated(false);
 
                 } else if (err.request) {
                     // La solicitud se realizó pero no se recibió respuesta
@@ -106,17 +112,17 @@ const Login: React.FC<ILogin> = ({ onLoginSuccess }) => {
                 } else {
                     // Algo sucedió al configurar la solicitud que lanzó un error
                     console.error('Error:', err.message);
-                }
+                };
+
             } else {
+            
                 // Manejar otros tipos de errores
                 console.error('Error no relacionado con Axios:', err);
             };
         };
     };
 
-    const togleFormReg = () => {
-        setMostrarRegistro(!mostrarRegistro);
-    };
+    const togleFormReg = () => setMostrarRegistro(!mostrarRegistro);
 
     return (
         <Section key="login" className={stylesFormLogin["container-section"]}>
