@@ -1,4 +1,7 @@
+// Importacion de hooks y componentes de React
 import React, { useState } from "react";
+
+// Importación de interfaces
 import type { IInputPassword } from "../../interface/IInput/IPassword";
 
 // Importación de css modular

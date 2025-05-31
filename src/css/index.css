@@ -1,31 +1,32 @@
-/*:root {
- 
+#root {
+  --fondoForm:     #f6f5f7;
+  --fondoAsideLog: #ff416c;
+  --fondoAsideReg: #be4bdb;
+  --colorBlanco:   white;
 }
 
-a {
- 
+* {
+    margin:     0;
+    padding:    0;
+    box-sizing: border-box; /* Asegura que el padding y el border no afecten el tamaño total */
 }
-a:hover {
- 
+
+html {
+  height: 95%;   /* Asegura que el body ocupe toda la altura de la ventana */
 }
 
 body {
-  
+  height:   95%;
+  margin:   0;
+  padding:  0;
+  font-family: sans-serif;
 }
 
-h1 {
- 
+.navbar {
+  z-index: 1050; /* Asegura que esté por encima del contenido */
 }
 
-button {
- 
+.main-content {
+  margin-top: 50px; /* Altura del navbar */
+  padding:    1rem;
 }
-
-button:hover {
-  
-}
-
-button:focus,
-button:focus-visible {
-  
-}*/

@@ -1,7 +1,7 @@
-// Importación React
-import React, { useContext, useState } from "react"
+// Importacion de hooks y componentes de React
+import React, { useContext, useState } from "react";
 
-// Importación de Componentes
+// Importación de modulos y componentes
 import Form from "../../components/form/form"
 import Legend from "../../components/form/legend";
 import InputUsername from "../../components/input/input-username";
@@ -14,7 +14,7 @@ import Fieldset from "../../components/form/fieldset";
 import AsideLogin from "../aside/aside-login";
 import FormRegistro from "../registro/registro-usuario";
 
-// Importación de Interfaces y tipos
+// Importación de Interfaces
 import type { ILogin } from "../../interface/ILogin";
 
 // Importacion de Estilos y Css
@@ -23,7 +23,7 @@ import stylesAsideLog from "../../css/module/aside/aside-login.module.css";
 import stylesAsideReg from "../../css/module/aside/aside-registro.module.css";
 import styleAsideEfecto from "../../css/module/aside/aside-Transicion.module.css";
 
-//Importación del Data Provieder para reutilizar el estado global de la autorización
+// Importacion del Provider la Api context
 import { DataContext } from "../api-Context/login-context";
 
 // Importación de Axios
@@ -33,7 +33,6 @@ import axios from "axios";
 const uriLogin = import.meta.env.VITE_API_LOGIN_USER;
 
 const Login: React.FC<ILogin> = ({ onLoginSuccess }) => {
- 
     const { dataLogin, setDataLogin } = useContext(DataContext);
     const [ mostrarRegistro, setMostrarRegistro ] = useState(false);
     
@@ -119,24 +118,12 @@ const Login: React.FC<ILogin> = ({ onLoginSuccess }) => {
     };
 
     return (
-        <Section 
-            key="login" 
-            className={stylesFormLogin["container-section"]}
-        >
-            {!mostrarRegistro && <Form 
-                    key="formulario-login" 
-                    onSubmit={handleSubmit}
-                    className={stylesFormLogin["container-Form"]}
-                >
-                    <Fieldset
-                        className={stylesFormLogin.containerFieldset}
-                    >
-                        <Div 
-                            key="userName"
-                        >
-                            <Legend
-                                text={"Inicio de Sesión"}
-                            />
+        <Section key="login" className={stylesFormLogin["container-section"]}>
+            {!mostrarRegistro && 
+                <Form key="formulario-login" onSubmit={handleSubmit} className={stylesFormLogin["container-Form"]}>
+                    <Fieldset className={stylesFormLogin.containerFieldset}>
+                        <Div key="userName">
+                            <Legend text={"Inicio de Sesión"}/>
                             <InputUsername
                                 name="userName"
                                 id="userName"
@@ -157,10 +144,7 @@ const Login: React.FC<ILogin> = ({ onLoginSuccess }) => {
                                 onChange={(e) => handleChange(e) }
                             />
                         </Div>
-                        <Div 
-                            key="olvidaste-contraseña"
-                            className={stylesFormLogin["container-olvidates-password"]}
-                        >
+                        <Div key="olvidaste-contraseña" className={stylesFormLogin["container-olvidates-password"]}>
                             <BtnLine
                                 text={"Olvidaste tu Contraseña"}
                                 type={"button"}
@@ -168,10 +152,7 @@ const Login: React.FC<ILogin> = ({ onLoginSuccess }) => {
                                 onClick={forgotPassword}
                             />
                         </Div>
-                        <Div 
-                            key="btn"
-                            className={stylesFormLogin["container-btn-login"]}
-                        >
+                        <Div key="btn" className={stylesFormLogin["container-btn-login"]}>
                             <BtnOutLine 
                                 key="ingresar"
                                 text={"Ingresar"}
@@ -189,19 +170,17 @@ const Login: React.FC<ILogin> = ({ onLoginSuccess }) => {
                             />
                         </Div>
                     </Fieldset>
-            </Form>}
-           <AsideLogin
-                classAside={`${styleAsideEfecto.aside} ${mostrarRegistro ? stylesAsideReg["container-Aside"] : stylesAsideLog["container-Aside"]} ${mostrarRegistro ? 'rotate-left' : ''}`}
-                textH1="¡Bienvenidos!"
-                textH2={mostrarRegistro ? "Ingresa a tu Cuenta" : "Crea tu cuenta" }
-                textBtn={mostrarRegistro ? "INGRESAR" : "REGISTRAR"}
-                classRegistro={mostrarRegistro ? stylesAsideLog["container-btn-registro"] : stylesAsideReg["container-btn-registro"] }
-                classBtnRegistro={mostrarRegistro ? stylesAsideReg["btn-registro"] : stylesAsideLog["btn-registro"]}
-                onClick={togleFormReg}
-            />
-            {mostrarRegistro && <FormRegistro 
-                key="form-registro"
-            />}
+                </Form>}
+                <AsideLogin
+                    classAside={`${styleAsideEfecto.aside} ${mostrarRegistro ? stylesAsideReg["container-Aside"] : stylesAsideLog["container-Aside"]} ${mostrarRegistro ? 'rotate-left' : ''}`}
+                    textH1="¡Bienvenidos!"
+                    textH2={mostrarRegistro ? "Ingresa a tu Cuenta" : "Crea tu cuenta" }
+                    textBtn={mostrarRegistro ? "INGRESAR" : "REGISTRAR"}
+                    classRegistro={mostrarRegistro ? stylesAsideLog["container-btn-registro"] : stylesAsideReg["container-btn-registro"] }
+                    classBtnRegistro={mostrarRegistro ? stylesAsideReg["btn-registro"] : stylesAsideLog["btn-registro"]}
+                    onClick={togleFormReg}
+                />
+            {mostrarRegistro && <FormRegistro key="form-registro"/>}
         </Section>
     );
 };

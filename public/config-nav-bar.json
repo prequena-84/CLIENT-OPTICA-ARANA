@@ -1,31 +1,19 @@
 [
     {
         "menu": "Inicio",
-        "submenu":[]
+        "submenu":[
+            {
+                "label": "Inicio",
+                "link": "/"
+            }
+        ]
     },
     {
         "menu": "Usuario",
         "submenu":[
             {
                 "label": "Actualizacion de datos",
-                "link": "/actualizacion-usuario"
-            },
-            {
-                "label": "Eliminación de usuario",
-                "link": "/actualizacion-usuario"
-            }
-        ]
-    },
-    {
-        "menu": "Cliente",
-        "submenu":[
-            {
-                "label": "Actualizacion de datos",
-                "link": "/actualizacion-usuario"
-            },
-            {
-                "label": "Eliminación del cliente",
-                "link": "/actualizacion-usuario"
+                "link": "/update-user"
             }
         ]
     }

@@ -1,4 +1,7 @@
+// Importacion de hooks y componentes de React
 import React, { createContext, useState } from 'react';
+
+// Importación de Interfaces
 import type { ILoginContext,IDatalogin } from '../../interface/Iapi-context/ILogin-context';
 
 const defaultContextValue: ILoginContext = {
@@ -14,7 +17,6 @@ const defaultContextValue: ILoginContext = {
 export const DataContext = createContext<ILoginContext>(defaultContextValue);
 
 const DataProvider: React.FC<ILoginContext> = ( {children, key = undefined} ) => {
-
     const [ dataLogin, setDataLogin ] = useState<IDatalogin>({
         userName:'',
         password:'',

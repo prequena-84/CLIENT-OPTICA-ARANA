@@ -22,8 +22,10 @@ import type { IUser } from "../../interface/IRegistro";
 // Importacion de hook axios para hacer peticiones al servidor
 import axios from "axios";
 
-const FormRegistro: React.FC<ILogin> = () => {
+//Importacion de URI API
+const uriAddUser = import.meta.env.VITE_API_ADD_USER;
 
+const FormRegistro: React.FC<ILogin> = () => {
     const [ dataUser, setDataUser ] = useState<IUser>({
             idUsuario:'',
             userName:'',
@@ -36,6 +38,7 @@ const FormRegistro: React.FC<ILogin> = () => {
 
     const handleChange = ( event: React.ChangeEvent<HTMLInputElement> ) => {
         const { name, value } = event.target;
+
         setDataUser( prevDataUser  => ({
             ...prevDataUser,
             [name]:value
@@ -53,13 +56,12 @@ const FormRegistro: React.FC<ILogin> = () => {
             WhastApp:'',
         });
     };
-
     
     const handleSubmit = async ( e: React.FormEvent ) => {
         e.preventDefault();  
 
         try {
-            const response = await axios.post('http://localhost:3100/user/insert/', {
+            const response = await axios.post(uriAddUser, {
                 dataUser
             });
 
@@ -90,11 +92,7 @@ const FormRegistro: React.FC<ILogin> = () => {
     };
 
     return (
-        <Form
-            key="formulario-login" 
-            onSubmit={handleSubmit}
-            className={stylesFormLogin["container-Form"]}
-        >
+        <Form key="formulario-login" onSubmit={handleSubmit} className={stylesFormLogin["container-Form"]}>
             <Fieldset className={stylesFormLogin.containerFieldset}>
                 <Div key="idUsuario">
                     <Legend key="titulo" text={"Registro de Usuario"}/>
@@ -187,10 +185,7 @@ const FormRegistro: React.FC<ILogin> = () => {
                         classInput={stylesFormLogin.inputUserName}
                     />
                 </Div>
-                <Div 
-                    key="btn"
-                    className={stylesFormLogin["container-btn-login"]}
-                >
+                <Div key="btn" className={stylesFormLogin["container-btn-login"]}>
                     <BtnOutLine 
                         key="ingresar"
                         text={"Ingresar"}

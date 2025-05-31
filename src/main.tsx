@@ -1,10 +1,11 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
-//import './index.css'
+// Importacion de Modulo
 import App from './App.tsx';
 
-// Imortación de Bootstrap
+// Imortación de Estilos css y Bootstrap 
+import './css/index.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 

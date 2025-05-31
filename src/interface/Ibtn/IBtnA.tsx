@@ -1,6 +1,4 @@
 import React from "react";
-
-
 interface IBtnA {
     key?:string | undefined;
     role?: "button" | undefined;

@@ -1,4 +1,7 @@
+// Importacion de hooks y componentes de React
 import React from "react";
+
+// Importación de interfaces
 import type { Iform } from "../../interface/IForms/IForms";
 
 const Form:React.FC<Iform> = ( {children, className = undefined, onSubmit} ) => {

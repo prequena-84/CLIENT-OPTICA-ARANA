@@ -1,5 +1,7 @@
+// Importacion de hooks y componentes de React
 import React from "react";
 
+// Importación de interfaces
 import type { IBtnA } from "../../interface/Ibtn/IBtnA";
 
 const BtnA:React.FC<IBtnA> = ( {
