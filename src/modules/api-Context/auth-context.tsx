@@ -19,6 +19,7 @@ export const AuthContext = createContext<IAutorizacion>(defaultContextValue);
 
 const AuthProvider: React.FC<IAutorizacion> = ( {children,key=undefined} ) => {
     const [ isAuthenticated,setIsAuthenticated ] = useState(false);
+    const [ isLoading, setIsloading ] = useState(true);
 
     useEffect (() => {
         const token = localStorage.getItem('token');
@@ -34,25 +35,28 @@ const AuthProvider: React.FC<IAutorizacion> = ( {children,key=undefined} ) => {
                     localStorage.removeItem('token'); 
 
                     // Asegúrate de que se establezca en false si ha expirado
-                    if (setIsAuthenticated) setIsAuthenticated(false);
+                    setIsAuthenticated(false);
 
                 } else {
                     // Si no ha expirado, establece la autenticación en true
-                    if (setIsAuthenticated) setIsAuthenticated(true);
+                    setIsAuthenticated(true);
                 };
 
             } catch (err) {
                 console.error("Error al decodificar el token:", err);
-                if (setIsAuthenticated) setIsAuthenticated(false); 
+                setIsAuthenticated(false); 
             }
+        
         } else {
             // Si no hay token, no está autenticado
-            if (setIsAuthenticated) setIsAuthenticated(false);
+            setIsAuthenticated(false);
         };
+
+        setIsloading(false); 
     }, []); 
 
     return (
-        <AuthContext.Provider key={key} value={ {isAuthenticated,setIsAuthenticated} }>
+        <AuthContext.Provider key={key} value={ {isAuthenticated,setIsAuthenticated,isLoading} }>
             {children}
         </AuthContext.Provider>
     );

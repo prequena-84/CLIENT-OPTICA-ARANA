@@ -6,8 +6,10 @@ interface IAutorizacion {
     setIsAuthenticated?: React.Dispatch<React.SetStateAction<boolean>>;
     key?:string | undefined;
     children?: ReactNode;
+    isLoading?: boolean;
+    setIsloading?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export type {
-    IAutorizacion
+    IAutorizacion,
 }

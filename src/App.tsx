@@ -13,6 +13,9 @@ import Inicio from "./modules/main/inicio";
 import UpdateUser from "./modules/main/update-user";
 import Login from "./modules/login/login";
 
+// Importacion de Spinner para la espera de datos
+import Loading from "./components/spinners/spinners";
+
 // Para que funcione en el Provider desde la App debe estar envuelto en el provider de Auth sino nunca actualizara el dato
 function App() {
   return (
@@ -23,7 +26,7 @@ function App() {
 };
 
 function MainApp() {
-  const { isAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated, isLoading  } = useContext(AuthContext);
 
   return (
       <DataProvider>
@@ -36,7 +39,11 @@ function MainApp() {
               </Routes>
           </BrowserRouter>
           ) : ( 
-            <Login />
+            !isLoading ? (
+              <Login />
+            ) : (
+              <Loading />
+            )
           )}
       </DataProvider>
   );
